@@ -2,17 +2,30 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use stdClass;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
+        $author = "soufiane";
+        $article = new stdClass();
+        $article->title = "theorie du complot";
+        $article->intro = "facsine depuis des lustres";
+        $article->content = "YOUUUUUUHOUUUUUUU";
+        $article->urgent = "je cherche un stage !";
+        $age = 19;
+        $tab = ["soso",18,true,'daouda','emmanuel'];
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            "article" => $article,
+            "auteur" => $author,
+            "condition" => $age,
+            "tab" => $tab
         ]);
     }
 }

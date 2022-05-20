@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/home', name: 'home_page')]
     public function index(): Response
     {
         $author = "soufiane";
@@ -26,6 +26,15 @@ class HomeController extends AbstractController
             "auteur" => $author,
             "condition" => $age,
             "tab" => $tab
+        ]);
+    }
+    #[Route('/article', name: 'app_article')]
+    public function article(): Response
+    {
+
+
+        return $this->render('home/article.html.twig', [
+ 
         ]);
     }
 }

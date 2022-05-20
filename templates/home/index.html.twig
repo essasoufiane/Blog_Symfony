@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %} accueil
 {% endblock %}
 
 {% block body %}
@@ -57,42 +57,13 @@
 
 
 	{% endfor %} #}
-    {% set karim = {'name':'karim','poids':null, 'forme':'rond'} %}
-	{% set jerome = {'name':'jerome','poids':85, 'forme':'stock'} %}
-	{% set le = {'name':'le','poids':65, 'forme':null} %}
-	{% set equipe = {karim,jerome,le} %}
-
-	{% for user in equipe %}
-
-		<h3>Prénom :{{user.name}}</h3>
-
-		{% if user.poids %}
-			<p>poids: {{user.poids}}</p>
-            {% else %}
-                <p>poids: Pas de poids</p>
-        {% endif %}
-		
-        {% if user.forme %}
-
-            <p>forme: {{user.forme}}</p>
-
-            {% if user.forme == 'stock' %}
-                <p>ça Pousse sec !</p>
-            {% endif %}
-
-            {% else %}
-                <p>forme: Pas de forme</p>
-        
-        {% endif %}
-			
-		
-    {% endfor %}
-
+    
 
 
 	{# sacré var_dump en twig #}
 	{# <pre>
 	            {{ dump(article) }}
 	        </pre> #}
-
+			
 {% endblock %}
+{% block userName %}Soufiane{% endblock %}

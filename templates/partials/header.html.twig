@@ -1,3 +1,5 @@
+{% set user = ["Soufiane","Essaouari","user",true] %}
+
     <header>
     		<header>
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,6 +32,10 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown">
+
+
+							{% if user[3] and user[2] == 'admin' %}
+							{# --------------admin menu--------------------- #}
 							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user"></i>
                                 Amar Bou
@@ -41,9 +47,37 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Déconnexion</a>
 							</div>
+
+							{% elseif user[3] and user[2] == 'user' %}
+				{# -----------------------------menu user--------------------------------------------- #}
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user"></i>
+                                Amar Bou
+                            </a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="#">Mon Profil</a>
+								<a class="dropdown-item" href="#">Mes articles</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Déconnexion</a>
+							</div>
+							{% else %}
+
+							<a href="#" class="text-white">
+                                <i class="fas fa-angle-right"></i>
+                                Connexion
+                            </a>
+
+							{% endif %}
+
 						</li>
 					</ul>
 				</div>
 			</nav>
 		</header>
     </header>
+
+
+
+	{# <pre>
+		{{ dump(user) }}
+	</pre> #}

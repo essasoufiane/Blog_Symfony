@@ -16,7 +16,7 @@ class HomeController extends AbstractController
         $article = new stdClass();
         $article->title = "theorie du complot";
         $article->intro = "facsine depuis des lustres";
-        $article->content = "YOUUUUUUHOUUUUUUU";
+        $article->content = "La terre est plate bordel !";
         $article->urgent = "je cherche un stage !";
         $age = 19;
         $tab = ["soso",18,true,'daouda','emmanuel'];

@@ -1,38 +1,98 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-{# j'ai declarer une variable dans la vue #}
-{% set urgent = 'Urgent ! Je cherche un stage !' %}
-{# j'ai declarer une variable avec un tableau dans la vue  #}
-{% set moi = {'name':'Soufiane',poids:79, forme:'Musclé'} %}
-<marquee behavior="slide">
-    <h1>Hello {{ auteur | title}}! ✅</h1>
-    <h2>{{ article.title | title}}</h2>
-    <p> {{ article.intro | title}}</p>
-    <p> {{ article.content | title}}</p>
-    <p>{{ article.urgent | title}}</p>
-    </marquee>
-    {% if condition > 18 %}
-    <p>je suis majeur</p>
-    {% else %}
-        <p>je suis mineur</p>
-    {% endif %}
-    {% for item in tab %}
-        <p>{{item | upper}} - {{loop.index0 *5}}</p>
+	{# j'ai declarer une variable dans la vue #}
+	{% set urgent = 'Urgent ! Je cherche un stage !' %}
+	{# j'ai declarer une variable avec un tableau dans la vue  #}
+	{% set moi = {'name':'Soufiane',poids:79, forme:'Musclé'} %}
+	<marquee behavior="slide">
+		<h1>Hello
+			{{ auteur | title}}! ✅</h1>
+		<h2>{{ article.title | title}}</h2>
+		<p>
+			{{ article.intro | title}}</p>
+		<p>
+			{{ article.content | title}}</p>
+		<p>{{ article.urgent | title}}</p>
+	</marquee>
+	{% if condition > 18 %}
+		<p>je suis majeur</p>
+	{% else %}
+		<p>je suis mineur</p>
+	{% endif %}
+	{% for item in tab %}
+		<p>{{item | upper}}
+			-
+			{{loop.index0 *5}}</p>
+	{% endfor %}
+	<p>
+		<marquee behavior="slide">{{ urgent }}</marquee>
+	</p>
+	<ul>
+		<li>{{moi.name}}</li>
+		<li>{{moi.poids}}</li>
+		<li>{{moi.forme}}</li>
+	</ul>
+	{# {% set karim = {'name':'karim','poids':80, 'forme':'rond'} %}
+	{% set jerome = {'name':'jerome','poids':85, 'forme':'stock'} %}
+	{% set le = {'name':'le','poids':65, 'forme':'fin'} %}
+	{% set equipe = {karim,jerome,le} %}
+
+	{% for user in equipe %}
+		<h3>Prénom :
+			{{user.name}}</h3>
+		{% if user.poids %}
+			<p>poids:
+				{{user.poids}}</p>
+		{% else %}
+			<p>poids:non definie</p>
+
+		{% endif %}
+
+			<p>forme:{{user.forme}}</p>
+
+
+
+	{% endfor %} #}
+    {% set karim = {'name':'karim','poids':null, 'forme':'rond'} %}
+	{% set jerome = {'name':'jerome','poids':85, 'forme':'stock'} %}
+	{% set le = {'name':'le','poids':65, 'forme':null} %}
+	{% set equipe = {karim,jerome,le} %}
+
+	{% for user in equipe %}
+
+		<h3>Prénom :{{user.name}}</h3>
+
+		{% if user.poids %}
+			<p>poids: {{user.poids}}</p>
+            {% else %}
+                <p>poids: Pas de poids</p>
+        {% endif %}
+		
+        {% if user.forme %}
+
+            <p>forme: {{user.forme}}</p>
+
+            {% if user.forme == 'stock' %}
+                <p>ça Pousse sec !</p>
+            {% endif %}
+
+            {% else %}
+                <p>forme: Pas de forme</p>
+        
+        {% endif %}
+			
+		
     {% endfor %}
-        <p><marquee behavior="slide">{{ urgent }}</marquee></p>
-        <ul>
-            <li>{{moi.name}}</li>
-            <li>{{moi.poids}}</li>
-            <li>{{moi.forme}}</li>
-        </ul>
 
 
-{# sacré var_dump en twig #}
-        {# <pre>
-            {{ dump(article) }}
-        </pre> #}
 
-{% endblock %} 
+	{# sacré var_dump en twig #}
+	{# <pre>
+	            {{ dump(article) }}
+	        </pre> #}
+
+{% endblock %}

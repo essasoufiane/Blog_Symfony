@@ -1,69 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} accueil
-{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-	{# j'ai declarer une variable dans la vue #}
-	{% set urgent = 'Urgent ! Je cherche un stage !' %}
-	{# j'ai declarer une variable avec un tableau dans la vue  #}
-	{% set moi = {'name':'Soufiane',poids:79, forme:'Musclé'} %}
-	<marquee behavior="slide">
-		<h1>Hello
-			{{ auteur | title}}! ✅</h1>
-		<h2>{{ article.title | title}}</h2>
-		<p>
-			{{ article.intro | title}}</p>
-		<p>
-			{{ article.content | title}}</p>
-		<p>{{ article.urgent | title}}</p>
-	</marquee>
-	{% if condition > 18 %}
-		<p>je suis majeur</p>
-	{% else %}
-		<p>je suis mineur</p>
-	{% endif %}
-	{% for item in tab %}
-		<p>{{item | upper}}
-			-
-			{{loop.index0 *5}}</p>
-	{% endfor %}
-	<p>
-		<marquee behavior="slide">{{ urgent }}</marquee>
-	</p>
-	<ul>
-		<li>{{moi.name}}</li>
-		<li>{{moi.poids}}</li>
-		<li>{{moi.forme}}</li>
-	</ul>
-	{# {% set karim = {'name':'karim','poids':80, 'forme':'rond'} %}
-	{% set jerome = {'name':'jerome','poids':85, 'forme':'stock'} %}
-	{% set le = {'name':'le','poids':65, 'forme':'fin'} %}
-	{% set equipe = {karim,jerome,le} %}
+<div class="container">
 
-	{% for user in equipe %}
-		<h3>Prénom :
-			{{user.name}}</h3>
-		{% if user.poids %}
-			<p>poids:
-				{{user.poids}}</p>
-		{% else %}
-			<p>poids:non definie</p>
+    <div class="jumbotron text-center my-5 shadow">
+        <h1 class="display-4">Bienvenue sur <span class="text-info">YesCode</span> !</h1>
+        <p class="lead">Ici ça parle de code, langages et technos de demain </p>
+        <hr class="my-4">
+        <p>Retrouvez nos derniers articles sur les technos les plus hype du moment !</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg shadow" href="#" role="button">  &lt;/&gt; Actualités &lt;/&gt; </a>
+        </p>
+    </div>
 
-		{% endif %}
+    <h2 class="text-center h1">Les derniers articles</h2>
 
-			<p>forme:{{user.forme}}</p>
+    <div class="row">
+        <div class="col-4">
+            <div class="card bg-light my-5 shadow">
+                <h3 class="card-header">Symfony</h3>
+                <img height="350px"  src="https://neo7.fr/wp-content/uploads/2018/01/symfony-logo.png" alt="Card image">
+                <div class="card-body">
+                  <p class="card-text">Symfony est un framework PHP complet</p>
+                  <a href="#" class="btn btn-primary rounded">Lire la suite</a>
+                  <div class="my-3">
+                      <a href="#" class="card-link">Fabien Potencier</a>
+                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  Il y a 2 jours
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col-4">
+            <div class="card bg-light my-5 shadow">
+                <h3 class="card-header">Angular</h3>
+                <img height="350px"  src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Card image">
+                <div class="card-body">
+                <p class="card-text">Angular le framework de Google</p>
+                <a href="#" class="btn btn-primary rounded">Lire la suite</a>
+                <div class="my-3">
+                    <a href="#" class="card-link">Angus Lard</a>
+                </div>
+                </div>
+                <div class="card-footer text-muted">
+                Il y a 2 jours
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card bg-light my-5 shadow">
+                <h3 class="card-header">Laravel</h3>
+                <img height="350px"  src="https://jf-blog.fr/wp-content/uploads/2018/07/laravel-logo.png" alt="Card image">
+                <div class="card-body">
+                <p class="card-text">Laravel est un framework PHP aussi</p>
+                <a href="#" class="btn btn-primary rounded">Lire la suite</a>
+                <div class="my-3">
+                    <a href="#" class="card-link">Lara Velle</a>
+                </div>
+                </div>
+                <div class="card-footer text-muted">
+                Il y a 2 jours
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
 
 
 
-	{% endfor %} #}
-    
-
-
-	{# sacré var_dump en twig #}
-	{# <pre>
-	            {{ dump(article) }}
-	        </pre> #}
-			
 {% endblock %}
-{% block userName %}Soufiane{% endblock %}

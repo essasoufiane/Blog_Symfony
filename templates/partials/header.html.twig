@@ -36,7 +36,7 @@
 
 							{% if user[3] and user[2] == 'admin' %}
 							{# --------------admin menu--------------------- #}
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle animate__shakeY animate__animated animate__delay-5s" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user"></i>
                                {{user[0] | title}}
                             </a>
@@ -50,7 +50,7 @@
 
 							{% elseif user[3] and user[2] == 'user' %}
 				{# -----------------------------menu user--------------------------------------------- #}
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle animate__shakeY animate__animated animate__delay-5s" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user"></i>
                                 {{user[0] | title}}
                             </a>
@@ -62,11 +62,11 @@
 							</div>
 							{% else %}
 
-							<a href="#" class="text-white pr-3">
+							<a href="#" class="text-white pr-3 animate__shakeY animate__animated animate__delay-5s">
                                 <i class="fas fa-angle-right"></i>
                                 Inscription
                             </a>
-							<a href="#" class="text-white">
+							<a href="#" class="text-white animate__shakeY animate__animated animate__delay-5s">
                                 <i class="fas fa-angle-right"></i>
                                 Connexion
                             </a>

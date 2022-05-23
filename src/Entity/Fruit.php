@@ -16,6 +16,9 @@ class Fruit
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $poigts;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class Fruit
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPoigts(): ?int
+    {
+        return $this->poigts;
+    }
+
+    public function setPoigts(?int $poigts): self
+    {
+        $this->poigts = $poigts;
 
         return $this;
     }

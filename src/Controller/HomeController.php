@@ -2,34 +2,36 @@
 
 namespace App\Controller;
 
-use stdClass;
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Fruit;
+use App\Repository\FruitRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'home_page')]
-    public function index(): Response
+    public function index(EntityManagerInterface $manager, FruitRepository $repo)
     {
-        $author = "soufiane";
-        $article = new stdClass();
-        $article->title = "theorie du complot";
-        $article->intro = "facsine depuis des lustres";
-        $article->content = "La terre est plate bordel !";
-        $article->urgent = "je cherche un stage !";
-        $age = 19;
-        $tab = ["soso",18,true,'daouda','emmanuel'];
+
+        $banane = new Fruit;
+        $banane->setName("fin de journée");
+        $banane->setPoigts(80);
+        dump($banane);
+
+        $manager->persist($banane);
+        $manager->flush();
+        $fruits = $repo->findAll();
 
         return $this->render('home/index.html.twig', [
-            "article" => $article,
-            "auteur" => $author,
-            "condition" => $age,
-            "tab" => $tab
+            'fruits' => $fruits
         ]);
     }
+
+
+
     #[Route('/article', name: 'app_article')]
-    public function article(): Response
+    public function article()
     {
 
 

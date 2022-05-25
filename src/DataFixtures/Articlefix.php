@@ -16,9 +16,9 @@ class Articlefix extends Fixture
         
         for ($i=0; $i < 10 ; $i++) { 
             $article = new Article();
-            $article->setTitle("angular");
-            $article->setIntro("cest tropp cool");
-            $article->setContent("très sympa comme framworks mais il faut avoir les bases");
+            $article->setTitle("Symfony");
+            $article->setIntro("lourd");
+            $article->setContent("<p>très sympa comme framworks mais il faut avoir les bases</p>");
             $article->setImage("https://picsum.photos/300");
             $article->setCreatedAt(new DateTime());
             $manager->persist($article);

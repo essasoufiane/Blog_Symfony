@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Article{% endblock %}
 
 {% block body %}
 
 <div class="row">
+            {% for item in article %}
+
 		{% include "/article/template.article.html.twig" %}
+                    {% endfor %}
 </div>
 {% endblock %}

@@ -17,7 +17,10 @@ class Fruit
     private $name;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $poigts;
+    private $poids;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $calibre;
 
     public function getId(): ?int
     {
@@ -36,14 +39,35 @@ class Fruit
         return $this;
     }
 
-    public function getPoigts(): ?int
+
+    public function getCalibre(): ?int
     {
-        return $this->poigts;
+        return $this->calibre;
     }
 
-    public function setPoigts(?int $poigts): self
+    public function setCalibre(?int $calibre): self
     {
-        $this->poigts = $poigts;
+        $this->calibre = $calibre;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of poids
+     */ 
+    public function getPoids()
+    {
+        return $this->poids;
+    }
+
+    /**
+     * Set the value of poids
+     *
+     * @return  self
+     */ 
+    public function setPoids($poids)
+    {
+        $this->poids = $poids;
 
         return $this;
     }

@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
+use Faker;
 use App\Entity\Article;
-use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -13,14 +13,17 @@ class Articlefix extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-        
+
+        $faker = Faker\Factory::create();
+
+
         for ($i=0; $i < 10 ; $i++) { 
             $article = new Article();
-            $article->setTitle("Symfony");
-            $article->setIntro("lourd");
-            $article->setContent("<p>très sympa comme framworks mais il faut avoir les bases</p>");
-            $article->setImage("https://picsum.photos/300");
-            $article->setCreatedAt(new DateTime());
+            $article->setTitle($faker->word($faker->randomDigit()));
+            $article->setIntro($faker->word($faker->randomDigit()));
+            $article->setContent('<p>'. implode('</p><p>', $faker->words(80)) . '<p>');
+            $article->setImage("https://picsum.photos/200/300?random=".$i);
+            $article->setCreatedAt($faker->dateTimeBetween('- 3 months'));
             $manager->persist($article);
             
         }

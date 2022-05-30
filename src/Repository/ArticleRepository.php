@@ -39,6 +39,7 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    // foncction qui sert a faire une requete DQL
     public function findLastArticles($nombre)
     {
         return $this->createQueryBuilder('a')

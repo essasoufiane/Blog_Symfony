@@ -23,7 +23,7 @@ class Articlefix extends Fixture
             $article->setIntro($faker->word($faker->randomDigit()));
             $article->setContent('<p>'. implode('</p><p>', $faker->words(80)) . '<p>');
             $article->setImage("https://picsum.photos/200/300?random=".$i);
-            $article->setCreatedAt($faker->dateTimeBetween('- 3 months'));
+            // $article->setCreatedAt($faker->dateTimeBetween('- 3 months'));
             $manager->persist($article);
             
         }

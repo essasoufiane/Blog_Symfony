@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Article
 {
     #[ORM\Id]
@@ -108,6 +111,26 @@ class Article
         $this->slug = $slug;
 
         return $this;
+    }
+
+    // fonction pour initier le slug au moment de la création de l'article
+    
+    #[ORM\PrePersist]
+    public function initSlug(){
+        
+        if (empty($this->slug)) {
+            $slug = new Slugify();
+            $this->slug = $slug->slugify($this->getTitle() . time() . hash('sha256', $this->getIntro()));
+        }
+        
+    }
+    
+    // fonction pour update une date au moment de la creation d'article par utilisateur
+    #[ORM\PrePersist]
+    public function updateDate(){
+        if (empty($this->createdAt)) {
+           $this->createdAt = new \DateTime();
+        }
     }
 
 

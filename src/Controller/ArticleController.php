@@ -18,4 +18,13 @@ class ArticleController extends AbstractController
             "article" => $articleRepository->findAll(),
         ]);
     }
+    #[Route('/article/{slug}', name: 'articles_show')]
+    public function show($slug, ArticleRepository $repo)
+    {
+
+        $article = $repo->findOneBySlug($slug);
+        return $this->render('article/show.html.twig', [
+            "article" => $article,
+        ]);
+    }
 }

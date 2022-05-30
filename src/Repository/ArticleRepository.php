@@ -39,6 +39,13 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    public function findLastArticles(){
+               return $this->createQueryBuilder('a')
+           ->getQuery()
+           ->getResult()
+       ;
+    }
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

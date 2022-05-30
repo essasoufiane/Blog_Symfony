@@ -5,13 +5,13 @@
                 <img height="350px"  src="{{item.image}}" alt="Card image">
                 <div class="card-body">
                 <p class="card-text">{{item.intro}}</p>
-                <p>{{item.content}}</p>
+                <p>{{item.content | raw}}</p>
                 <div class="my-3">
                     <a href="#" class="card-link"></a>
                 </div>
                 </div>
                 <div class="card-footer text-muted">
-                Créé le {{item.createdAt | date}}
+                Créé le {{item.createdAt | date('Dd/m/y à H:i' , "Europe/Paris")}}
 
                 </div>
             </div>

@@ -2,27 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
-    #[Route('/article', name: 'app_article')]
-    public function index(ArticleRepository $repo,ArticleRepository $article)
+    #[Route('/article', name: 'articles_index')]
+    public function index(ArticleRepository $articleRepository): Response
     {
-        $article = new Article();
-        $article->getTitle(); 
-        $article->getIntro(); 
-        $article->getContent(); 
-        $article->getImage(); 
-        $article->getCreatedAt();
-        $article= $repo->findAll();
-        dump($article);
         return $this->render('article/index.html.twig', [
-            'article' => $article,
+            "article" => $articleRepository->findAll(),
         ]);
     }
 }

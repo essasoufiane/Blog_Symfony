@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
-    #[Route('/article', name: 'articles_index')]
+    #[Route('/articles', name: 'articles_index')]
     public function index(ArticleRepository $articleRepository): Response
     {
 
@@ -18,7 +18,7 @@ class ArticleController extends AbstractController
             "article" => $articleRepository->findAll(),
         ]);
     }
-    #[Route('/article/{slug}', name: 'articles_show')]
+    #[Route('/articles/{slug}', name: 'article_show')]
     public function show($slug, ArticleRepository $repo)
     {
 

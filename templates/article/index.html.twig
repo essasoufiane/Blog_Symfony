@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="row">
-            {% for item in article %}
+            {% for item in article| reverse %}
 
 		{% include "/article/template.article.html.twig" %}
                     {% endfor %}

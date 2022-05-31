@@ -37,6 +37,8 @@ class ArticleController extends AbstractController
             $manager->persist($article);
             $manager->flush();
 
+            $this->addFlash("success", "L'article<strong>{$article->getTitle()}</strong> a bien été crée");
+
             return $this->redirectToRoute('article_show',['slug'=>$article->getSlug()]);
         }
 

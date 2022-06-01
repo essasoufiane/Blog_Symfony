@@ -55,4 +55,27 @@ class ArticleController extends AbstractController
             "article" => $article,
         ]);
     }
+    #[Route('/articles/{slug}/edit', name: 'article_edit')]
+    public function edit(Request $request, Article $article, EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(ArticleType::class, $article);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $manager->flush();
+
+            $this->addFlash('info',"L'article <strong>{$article->getTitle()}</strong> a bien été modifié");
+
+            return $this->redirectToRoute('article_show', [
+                'slug'=>$article->getSlug()
+            ]);
+        }
+
+        return $this->render('article/edit.html.twig',[
+            'article' => $article,
+            'form' => $form->createView()
+        ]);
+    }
 }

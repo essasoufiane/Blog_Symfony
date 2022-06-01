@@ -59,23 +59,34 @@ class ArticleController extends AbstractController
     public function edit(Request $request, Article $article, EntityManagerInterface $manager)
     {
         $form = $this->createForm(ArticleType::class, $article);
-
+        
         $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid()){
 
             $manager->flush();
-
+            
             $this->addFlash('info',"L'article <strong>{$article->getTitle()}</strong> a bien été modifié");
-
+            
             return $this->redirectToRoute('article_show', [
                 'slug'=>$article->getSlug()
             ]);
         }
-
+        
         return $this->render('article/edit.html.twig',[
             'article' => $article,
             'form' => $form->createView()
         ]);
+    }
+    #[Route('/articles/{slug}/delete', name: 'article_delete')]
+    public function delete(Article $article, EntityManagerInterface $manager)
+    {
+        $manager->remove($article);
+        $manager->flush();
+
+        $this->addFlash('danger',"Larticle a bien été supprimé");
+
+        return $this->redirectToRoute('articles_index');
+    
     }
 }

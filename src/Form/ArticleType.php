@@ -17,25 +17,28 @@ class ArticleType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => "Titre de l'article",
-                 "attr" => ["class"=>"text-info",
+                 "attr" => ["class"=>"text-info hvr-grow",
                  "placeholder" => "Le titre de votre article"]
             ])
             ->add('intro', TextType::class, [
                 'label' => "Introduction de l'article",
-                 "attr" => ["class"=>"text-info",
+                 "attr" => ["class"=>"text-info hvr-grow",
                  "placeholder" => "intro de l'article"]
             ])
             ->add('content', TextareaType::class, [
                 'label' => "Déscription de l'article",
-                 "attr" => ["class"=>"text-info",
+                 "attr" => ["class"=>"text-info hvr-grow",
                  "placeholder" => "Déscription de l'article"]
             ])
             ->add('image', TextType::class, [
                 'label' => "Url de l'image",
-                 "attr" => ["class"=>"text-info",
+                 "attr" => ["class"=>"text-info hvr-grow",
                  "placeholder" => "Url de l'image"]
             ])
-            ->add('Envoyer', SubmitType::class)
+            ->add('Envoyer', SubmitType::class,[
+                "attr" => ["class"=>"animate__shakeY animate__animated hvr-bounce-to-bottom",]
+                
+            ])
         ;
     }
 

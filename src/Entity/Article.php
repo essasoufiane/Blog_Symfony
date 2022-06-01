@@ -22,18 +22,33 @@ class Article
     #[Assert\Length(
              min : 5,
              max : 20,
-             minMessage : "Le titre de faire au moin {{ limit }} characrtères",
-             maxMessage : "LE titre ne peux pas depasser {{ limit }} characrtères"
+             minMessage : "Le titre dois être composer de minimum {{ limit }} characrtères",
+             maxMessage : "Le titre ne peux pas depasser {{ limit }} characrtères"
         )]
     private $title;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+        min : 20,
+        max : 60,
+        minMessage : "L'intro dois être composer de minimum {{ limit }} characrtères",
+        maxMessage : "L'intro ne peux pas depasser {{ limit }} characrtères"
+   )]
     private $intro;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\Length(
+        min : 30,
+        max : 100,
+        minMessage : "La déscription dois être composer de minimum {{ limit }} characrtères",
+        maxMessage : "La déscription ne peux pas depasser {{ limit }} characrtères"
+   )]
     private $content;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Url(
+         message : "Votre url '{{ value }}' n'est pas valide !",
+       )]
     private $image;
 
     #[ORM\Column(type: 'datetime', nullable: true)]

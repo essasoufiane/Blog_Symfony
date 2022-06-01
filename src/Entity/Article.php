@@ -6,6 +6,8 @@ use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -17,6 +19,12 @@ class Article
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(
+             min : 5,
+             max : 20,
+             minMessage : "Le titre de faire au moin {{ limit }} characrtères",
+             maxMessage : "LE titre ne peux pas depasser {{ limit }} characrtères"
+        )]
     private $title;
 
     #[ORM\Column(type: 'string', length: 255)]

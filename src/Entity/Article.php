@@ -2,62 +2,76 @@
 
 namespace App\Entity;
 
+
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-#[ORM\Entity(repositoryClass: ArticleRepository::class)]
-#[ORM\HasLifecycleCallbacks]
+ /**
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\HasLifecycleCallbacks
+ */
 class Article
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-             min : 5,
-             max : 20,
-             minMessage : "Le titre dois être composer de minimum {{ limit }} characrtères",
-             maxMessage : "Le titre ne peux pas depasser {{ limit }} characrtères"
-        )]
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 255,
+     *      minMessage = "Un titre aussi court ? Minimum {{ limit }} charactères requis ",
+     *      maxMessage = "Un titre de moins {{ limit }} charactères est requis  !",
+     *      allowEmptyString = false
+     * )
+     */
     private $title;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(
-        min : 20,
-        max : 60,
-        minMessage : "L'intro dois être composer de minimum {{ limit }} characrtères",
-        maxMessage : "L'intro ne peux pas depasser {{ limit }} characrtères"
-   )]
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 20,
+     *      max = 255,
+     *      minMessage = "Minimum {{ limit }} charactères pour l'intro ",
+     *      maxMessage = "Plus de {{ limit }} charactères ce n'est plus une intro  !",
+     *      allowEmptyString = false)
+     */
     private $intro;
 
-    #[ORM\Column(type: 'text')]
-    #[Assert\Length(
-        min : 30,
-        max : 100,
-        minMessage : "La déscription dois être composer de minimum {{ limit }} characrtères",
-        maxMessage : "La déscription ne peux pas depasser {{ limit }} characrtères"
-   )]
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Ce champs ne peut pas etre vide")
+     */
     private $content;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Url(
-         message : "Votre url '{{ value }}' n'est pas valide !",
-       )]
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Url(message="Ceci n'est pas une url")
+     */
     private $image;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    /**
+     * @ORM\Column(type="datetime")
+     */
     private $createdAt;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $slug;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
 
     public function getId(): ?int
     {
@@ -88,12 +102,12 @@ class Article
         return $this;
     }
 
-    public function getContent(): ?string 
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent(string  $content): self
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
@@ -117,7 +131,7 @@ class Article
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -136,27 +150,45 @@ class Article
         return $this;
     }
 
-    // fonction pour initier le slug au moment de la création de l'article
-    
-    #[ORM\PrePersist]
+    /**
+     * Génére un slug automatiquement
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
     public function initSlug(){
-        
-        if (empty($this->slug)) {
-            $slug = new Slugify();
-            $this->slug = $slug->slugify($this->getTitle() . time() . hash('sha256', $this->getIntro()));
+        if(empty($this->slug) ){
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->getTitle(). time( ) . hash("sha1", $this->getIntro()) );
         }
-        
+    }
+
+    /**
+     * Génére la date automatiquement 
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * 
+     * @return void
+     */
+    public function updateDate(){
+        if(empty($this->createdAt)){
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    public function getAuthor(): ?user
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?user $author): self
+    {
+        $this->author = $author;
+
+        return $this;
     }
     
-    // fonction pour update une date au moment de la creation d'article par utilisateur
-    #[ORM\PrePersist]
-    public function updateDate(){
-        if (empty($this->createdAt)) {
-           $this->createdAt = new \DateTime();
-        }
-    }
-
-
 }
-
-
